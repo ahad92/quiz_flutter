@@ -3,10 +3,6 @@ import 'package:my_app/result.dart';
 import './quiz.dart';
 import './result.dart';
 
-// void main() {
-//   runApp(MyApp());
-// }
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
@@ -47,6 +43,13 @@ class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
   var _totalScore = 0;
 
+  void _resetQiuz() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
+  }
+
   void _answerQuestion(int score) {
     // var aBool = true;
     // aBool = false;
@@ -65,13 +68,10 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // var dummy = ['Hello'];
-    // dummy.add('Max');
-    // print(dummy);
-
     // questions = []; //this doesn't work if question is a const
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Text(
@@ -83,7 +83,7 @@ class _MyAppState extends State<MyApp> {
                 answerQuestion: _answerQuestion,
                 questionIndex: _questionIndex,
                 questions: _questions)
-            : Result(_totalScore),
+            : Result(_totalScore, _resetQiuz),
       ),
     );
   }
